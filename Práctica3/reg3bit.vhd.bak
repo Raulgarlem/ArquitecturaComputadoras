@@ -9,7 +9,7 @@ entity register4 is
 		D : in  std_logic_vector (3 downto 0); 
 		Q : out  std_logic_vector (3 downto 0));
 		
-end register6;
+end register4;
  
 architecture Behavioral of register4 is
 	constant s0 :  std_logic_vector(3 downto 0) := B"000000";

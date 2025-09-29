@@ -12,7 +12,7 @@ entity register4 is
 end register4;
  
 architecture Behavioral of register4 is
-	constant s0 :  std_logic_vector(3 downto 0) := B"000000";
+	constant s0 :  std_logic_vector(3 downto 0) := B"0000";
 		begin
 			process (clk,reset) 
 				begin

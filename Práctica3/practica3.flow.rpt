@@ -1,5 +1,5 @@
 Flow report for practica3
-Thu Sep 25 12:59:33 2025
+Sun Sep 28 19:56:10 2025
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Flow Summary                                                                      ;
 +------------------------------------+----------------------------------------------+
-; Flow Status                        ; Flow Failed - Thu Sep 25 12:59:33 2025       ;
+; Flow Status                        ; Successful - Sun Sep 28 19:56:09 2025        ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; practica3                                    ;
 ; Top-level Entity Name              ; practica3                                    ;
@@ -46,15 +46,15 @@ applicable agreement for further details.
 ; Device                             ; EP4CE22F17C6                                 ;
 ; Timing Models                      ; Preliminary                                  ;
 ; Met timing requirements            ; N/A                                          ;
-; Total logic elements               ; N/A until Partition Merge                    ;
-;     Total combinational functions  ; N/A until Partition Merge                    ;
-;     Dedicated logic registers      ; N/A until Partition Merge                    ;
-; Total registers                    ; N/A until Partition Merge                    ;
-; Total pins                         ; N/A until Partition Merge                    ;
-; Total virtual pins                 ; N/A until Partition Merge                    ;
-; Total memory bits                  ; N/A until Partition Merge                    ;
-; Embedded Multiplier 9-bit elements ; N/A until Partition Merge                    ;
-; Total PLLs                         ; N/A until Partition Merge                    ;
+; Total logic elements               ; 61 / 22,320 ( < 1 % )                        ;
+;     Total combinational functions  ; 60 / 22,320 ( < 1 % )                        ;
+;     Dedicated logic registers      ; 32 / 22,320 ( < 1 % )                        ;
+; Total registers                    ; 32                                           ;
+; Total pins                         ; 30 / 154 ( 19 % )                            ;
+; Total virtual pins                 ; 0                                            ;
+; Total memory bits                  ; 0 / 608,256 ( 0 % )                          ;
+; Embedded Multiplier 9-bit elements ; 0 / 132 ( 0 % )                              ;
+; Total PLLs                         ; 0 / 4 ( 0 % )                                ;
 +------------------------------------+----------------------------------------------+
 
 
@@ -63,50 +63,60 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 09/25/2025 12:59:32 ;
+; Start date & time ; 09/28/2025 19:56:03 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; practica3           ;
 +-------------------+---------------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                                                                    ;
-+------------------------------------+---------------------------------+---------------+-------------+----------------+
-; Assignment Name                    ; Value                           ; Default Value ; Entity Name ; Section Id     ;
-+------------------------------------+---------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID              ; 237751129469415.175882677111012 ; --            ; --          ; --             ;
-; MAX_CORE_JUNCTION_TEMP             ; 85                              ; --            ; --          ; --             ;
-; MIN_CORE_JUNCTION_TEMP             ; 0                               ; --            ; --          ; --             ;
-; NOMINAL_CORE_SUPPLY_VOLTAGE        ; 1.0V                            ; --            ; --          ; --             ;
-; PARTITION_COLOR                    ; 16764057                        ; --            ; --          ; Top            ;
-; PARTITION_NETLIST_TYPE             ; SOURCE                          ; --            ; --          ; Top            ;
-; USE_GENERATED_PHYSICAL_CONSTRAINTS ; Off                             ; --            ; --          ; eda_blast_fpga ;
-+------------------------------------+---------------------------------+---------------+-------------+----------------+
++----------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                     ;
++------------------------------------+----------------------------------+---------------+-------------+----------------+
+; Assignment Name                    ; Value                            ; Default Value ; Entity Name ; Section Id     ;
++------------------------------------+----------------------------------+---------------+-------------+----------------+
+; COMPILER_SIGNATURE_ID              ; 106444396542809.175911096320068  ; --            ; --          ; --             ;
+; MAX_CORE_JUNCTION_TEMP             ; 85                               ; --            ; --          ; --             ;
+; MIN_CORE_JUNCTION_TEMP             ; 0                                ; --            ; --          ; --             ;
+; MISC_FILE                          ; C:/quartus_nuevo/3/practica3.dpf ; --            ; --          ; --             ;
+; NOMINAL_CORE_SUPPLY_VOLTAGE        ; 1.2V                             ; --            ; --          ; --             ;
+; PARTITION_COLOR                    ; 16764057                         ; --            ; --          ; Top            ;
+; PARTITION_NETLIST_TYPE             ; SOURCE                           ; --            ; --          ; Top            ;
+; USE_GENERATED_PHYSICAL_CONSTRAINTS ; Off                              ; --            ; --          ; eda_blast_fpga ;
++------------------------------------+----------------------------------+---------------+-------------+----------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------+
-; Flow Elapsed Time                                                                                                        ;
-+----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
-+----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:02     ; 1.0                     ; 237 MB              ; 00:00:01                           ;
-; Total                ; 00:00:02     ; --                      ; --                  ; 00:00:01                           ;
-+----------------------+--------------+-------------------------+---------------------+------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------+
+; Flow Elapsed Time                                                                                                             ;
++---------------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
++---------------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Analysis & Synthesis      ; 00:00:01     ; 1.0                     ; 244 MB              ; 00:00:01                           ;
+; Fitter                    ; 00:00:04     ; 1.0                     ; 305 MB              ; 00:00:04                           ;
+; TimeQuest Timing Analyzer ; 00:00:02     ; 1.0                     ; 262 MB              ; 00:00:01                           ;
+; Assembler                 ; 00:00:01     ; 1.0                     ; 253 MB              ; 00:00:01                           ;
+; Total                     ; 00:00:07     ; --                      ; --                  ; 00:00:06                           ;
++---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
-+---------------------------------------------------------------------------------------+
-; Flow OS Summary                                                                       ;
-+----------------------+------------------+---------------+------------+----------------+
-; Module Name          ; Machine Hostname ; OS Name       ; OS Version ; Processor type ;
-+----------------------+------------------+---------------+------------+----------------+
-; Analysis & Synthesis ; DESKTOP-A3PGPET  ; Windows Vista ; 6.2        ; x86_64         ;
-+----------------------+------------------+---------------+------------+----------------+
++--------------------------------------------------------------------------------------------+
+; Flow OS Summary                                                                            ;
++---------------------------+------------------+---------------+------------+----------------+
+; Module Name               ; Machine Hostname ; OS Name       ; OS Version ; Processor type ;
++---------------------------+------------------+---------------+------------+----------------+
+; Analysis & Synthesis      ; DESKTOP-GB6PTDK  ; Windows Vista ; 6.2        ; x86_64         ;
+; Fitter                    ; DESKTOP-GB6PTDK  ; Windows Vista ; 6.2        ; x86_64         ;
+; Assembler                 ; DESKTOP-GB6PTDK  ; Windows Vista ; 6.2        ; x86_64         ;
+; TimeQuest Timing Analyzer ; DESKTOP-GB6PTDK  ; Windows Vista ; 6.2        ; x86_64         ;
++---------------------------+------------------+---------------+------------+----------------+
 
 
 ------------
 ; Flow Log ;
 ------------
 quartus_map --read_settings_files=on --write_settings_files=off practica3 -c practica3
+quartus_fit --read_settings_files=off --write_settings_files=off practica3 -c practica3
+quartus_asm --read_settings_files=off --write_settings_files=off practica3 -c practica3
+quartus_sta practica3 -c practica3
 
 
 

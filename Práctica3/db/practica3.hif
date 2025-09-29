@@ -20,26 +20,6 @@ VHSM_ON
 -- Start VHDL Libraries --
 -- End VHDL Libraries --
 # entity
-practica3
-# storage
-db|practica3.(0).cnf
-db|practica3.(0).cnf
-# case_insensitive
-# source_file
-practica3.bdf
-1d9b7a4e27ca1610d8399b26eb989f5
-26
-# internal_option {
-BLOCK_DESIGN_NAMING
-AUTO
-}
-# hierarchies {
-|
-}
-# macro_sequence
-
-# end
-# entity
 sensa_boton
 # storage
 db|practica3.(1).cnf
@@ -106,10 +86,43 @@ a36c8ec425c8a2589af98b2d4daabc3
 
 # end
 # entity
-conector4x2a6
+register6
 # storage
 db|practica3.(3).cnf
 db|practica3.(3).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+reg6bit.vhd
+457f8b6b444ec0a4c29cc66c3c858cb
+5
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+}
+# hierarchies {
+register6:inst5
+}
+# lmf
+|altera|91sp2|quartus|lmf|maxplus2.lmf
+a36c8ec425c8a2589af98b2d4daabc3
+# macro_sequence
+
+# end
+# entity
+conector4x2a6
+# storage
+db|practica3.(4).cnf
+db|practica3.(4).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -141,8 +154,8 @@ a36c8ec425c8a2589af98b2d4daabc3
 # entity
 conector8a4x4
 # storage
-db|practica3.(4).cnf
-db|practica3.(4).cnf
+db|practica3.(5).cnf
+db|practica3.(5).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -174,8 +187,8 @@ a36c8ec425c8a2589af98b2d4daabc3
 # entity
 memoria
 # storage
-db|practica3.(5).cnf
-db|practica3.(5).cnf
+db|practica3.(6).cnf
+db|practica3.(6).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -205,18 +218,18 @@ a36c8ec425c8a2589af98b2d4daabc3
 
 # end
 # entity
-register6
+register4
 # storage
-db|practica3.(6).cnf
-db|practica3.(6).cnf
+db|practica3.(7).cnf
+db|practica3.(7).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
 # case_insensitive
 # source_file
-reg6bit.vhd
-457f8b6b444ec0a4c29cc66c3c858cb
+reg3bit.vhd
+ec1997991442fde4d3a3226c6d2bcde9
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -229,11 +242,31 @@ AUTO_ROM_RECOGNITION
 ON
 }
 # hierarchies {
-register6:inst5
+register4:inst6
 }
 # lmf
 |altera|91sp2|quartus|lmf|maxplus2.lmf
 a36c8ec425c8a2589af98b2d4daabc3
+# macro_sequence
+
+# end
+# entity
+practica3
+# storage
+db|practica3.(0).cnf
+db|practica3.(0).cnf
+# case_insensitive
+# source_file
+practica3.bdf
+91b936e8c798c4a155c58284db849dc7
+26
+# internal_option {
+BLOCK_DESIGN_NAMING
+AUTO
+}
+# hierarchies {
+|
+}
 # macro_sequence
 
 # end
