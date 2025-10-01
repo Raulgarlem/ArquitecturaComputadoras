@@ -1,0 +1,28 @@
+# Quartus generated files
+db/
+incremental_db/
+output_files/
+greybox_tmp/
+*.rpt
+*.smsg
+*.bak
+*.qws
+*.qdf
+*.sof
+*.pof
+*.jic
+*.map
+*.fit.*
+*.sta.*
+*.asm.*
+*.eqn
+*.sld
+*.summary
+*.xml
+*.csv
+*.sdc~*
+*.qip~*
+# Simulation work dirs (ModelSim, etc.)
+**/work/
+transcript
+vsim.wlf
