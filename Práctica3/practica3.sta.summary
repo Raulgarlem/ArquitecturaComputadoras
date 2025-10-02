@@ -12,7 +12,7 @@ TNS   : -0.111
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clk'
 Slack : -3.000
-TNS   : -29.000
+TNS   : -33.000
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'divider:inst|cuenta[23]'
 Slack : -1.000
@@ -23,12 +23,12 @@ Slack : -1.388
 TNS   : -18.469
 
 Type  : Slow 1200mV 0C Model Hold 'clk'
-Slack : -0.097
-TNS   : -0.097
+Slack : -0.098
+TNS   : -0.098
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clk'
 Slack : -3.000
-TNS   : -29.000
+TNS   : -33.000
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'divider:inst|cuenta[23]'
 Slack : -1.000
@@ -44,7 +44,7 @@ TNS   : -0.085
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clk'
 Slack : -3.000
-TNS   : -30.532
+TNS   : -34.775
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'divider:inst|cuenta[23]'
 Slack : -1.000

@@ -120,7 +120,7 @@ applicable agreement for further details.
 )
 (pin
 	(output)
-	(rect 432 296 608 312)
+	(rect 440 296 616 312)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
 	(text "div_clk" (rect 90 0 125 12)(font "Arial" ))
 	(pt 0 8)
@@ -476,6 +476,10 @@ applicable agreement for further details.
 	(pt 272 208)
 )
 (connector
+	(pt 240 280)
+	(pt 256 280)
+)
+(connector
 	(pt 272 304)
 	(pt 256 304)
 )
@@ -488,8 +492,12 @@ applicable agreement for further details.
 	(pt 256 224)
 )
 (connector
-	(pt 256 224)
-	(pt 256 280)
+	(pt 448 304)
+	(pt 448 296)
+)
+(connector
+	(pt 440 304)
+	(pt 448 304)
 )
 (connector
 	(pt 176 48)
@@ -571,6 +579,10 @@ applicable agreement for further details.
 	(bus)
 )
 (connector
+	(pt 440 32)
+	(pt 424 32)
+)
+(connector
 	(pt 408 48)
 	(pt 440 48)
 )
@@ -580,55 +592,16 @@ applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 1184 104)
-	(pt 1000 104)
-	(bus)
-)
-(connector
-	(pt 1000 48)
-	(pt 1000 104)
-	(bus)
-)
-(connector
-	(pt 1000 104)
-	(pt 1000 280)
-	(bus)
-)
-(connector
-	(pt 1056 248)
-	(pt 1056 240)
-)
-(connector
-	(pt 1064 248)
-	(pt 1056 248)
-)
-(connector
-	(pt 240 280)
-	(pt 256 280)
-)
-(connector
-	(pt 872 240)
-	(pt 872 280)
-)
-(connector
-	(pt 872 240)
-	(pt 1056 240)
-)
-(connector
-	(pt 256 280)
-	(pt 872 280)
-)
-(connector
-	(pt 424 32)
-	(pt 440 32)
-)
-(connector
 	(pt 400 208)
+	(pt 416 208)
+)
+(connector
+	(pt 416 208)
 	(pt 440 208)
 )
 (connector
-	(pt 424 32)
-	(pt 424 304)
+	(pt 416 208)
+	(pt 416 216)
 )
 (connector
 	(pt 368 304)
@@ -636,11 +609,47 @@ applicable agreement for further details.
 )
 (connector
 	(pt 424 304)
-	(pt 432 304)
+	(pt 440 304)
+)
+(connector
+	(pt 1000 48)
+	(pt 1000 280)
+	(bus)
+)
+(connector
+	(pt 1184 104)
+	(pt 1184 248)
+	(bus)
+)
+(connector
+	(pt 424 32)
+	(pt 424 304)
+)
+(connector
+	(pt 256 224)
+	(pt 256 272)
+)
+(connector
+	(pt 256 272)
+	(pt 256 280)
+)
+(connector
+	(pt 256 272)
+	(pt 872 272)
+)
+(connector
+	(pt 872 248)
+	(pt 1064 248)
+)
+(connector
+	(pt 872 248)
+	(pt 872 272)
 )
 (junction (pt 240 208))
 (junction (pt 256 280))
+(junction (pt 440 304))
 (junction (pt 776 32))
-(junction (pt 1000 32))
-(junction (pt 1000 104))
 (junction (pt 424 304))
+(junction (pt 1000 32))
+(junction (pt 416 208))
+(junction (pt 256 272))
