@@ -5,6 +5,7 @@ reloj <= sensa_boton:inst1.reloj
 boton => sensa_boton:inst1.boton
 clk => sensa_boton:inst1.clk
 clk => divider:inst.clk
+clk => register4:inst6.clk
 div_clk <= divider:inst.div_clk
 dir_mem[0] <= register6:inst5.Q[0]
 dir_mem[1] <= register6:inst5.Q[1]

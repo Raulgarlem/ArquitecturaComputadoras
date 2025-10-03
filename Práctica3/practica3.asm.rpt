@@ -1,5 +1,5 @@
 Assembler report for practica3
-Sun Sep 28 19:56:09 2025
+Wed Oct 01 18:00:18 2025
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -10,7 +10,7 @@ Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: C:/quartus_nuevo/3/practica3.sof
+  5. Assembler Device Options: C:/Users/User/OneDrive/Documentos/GitHub/ArquitecturaComputadoras/Práctica3/practica3.sof
   6. Assembler Messages
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Sun Sep 28 19:56:09 2025 ;
+; Assembler Status      ; Successful - Wed Oct 01 18:00:18 2025 ;
 ; Revision Name         ; practica3                             ;
 ; Top-level Entity Name ; practica3                             ;
 ; Family                ; Cyclone IV E                          ;
@@ -77,24 +77,24 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------+----------+---------------+
 
 
-+----------------------------------+
-; Assembler Generated Files        ;
-+----------------------------------+
-; File Name                        ;
-+----------------------------------+
-; C:/quartus_nuevo/3/practica3.sof ;
-+----------------------------------+
++-------------------------------------------------------------------------------------------+
+; Assembler Generated Files                                                                 ;
++-------------------------------------------------------------------------------------------+
+; File Name                                                                                 ;
++-------------------------------------------------------------------------------------------+
+; C:/Users/User/OneDrive/Documentos/GitHub/ArquitecturaComputadoras/Práctica3/practica3.sof ;
++-------------------------------------------------------------------------------------------+
 
 
-+------------------------------------------------------------+
-; Assembler Device Options: C:/quartus_nuevo/3/practica3.sof ;
-+----------------+-------------------------------------------+
-; Option         ; Setting                                   ;
-+----------------+-------------------------------------------+
-; Device         ; EP4CE22F17C6                              ;
-; JTAG usercode  ; 0xFFFFFFFF                                ;
-; Checksum       ; 0x0013DF69                                ;
-+----------------+-------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------+
+; Assembler Device Options: C:/Users/User/OneDrive/Documentos/GitHub/ArquitecturaComputadoras/Práctica3/practica3.sof ;
++----------------+----------------------------------------------------------------------------------------------------+
+; Option         ; Setting                                                                                            ;
++----------------+----------------------------------------------------------------------------------------------------+
+; Device         ; EP4CE22F17C6                                                                                       ;
+; JTAG usercode  ; 0xFFFFFFFF                                                                                         ;
+; Checksum       ; 0x0013DF69                                                                                         ;
++----------------+----------------------------------------------------------------------------------------------------+
 
 
 +--------------------+
@@ -103,13 +103,13 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Assembler
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Sun Sep 28 19:56:08 2025
+    Info: Processing started: Wed Oct 01 18:00:17 2025
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off practica3 -c practica3
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 0 warnings
     Info: Peak virtual memory: 253 megabytes
-    Info: Processing ended: Sun Sep 28 19:56:09 2025
+    Info: Processing ended: Wed Oct 01 18:00:18 2025
     Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:01
 

@@ -20,6 +20,26 @@ VHSM_ON
 -- Start VHDL Libraries --
 -- End VHDL Libraries --
 # entity
+practica3
+# storage
+db|practica3.(0).cnf
+db|practica3.(0).cnf
+# case_insensitive
+# source_file
+practica3.bdf
+ad54987843a639da2861dba81f76124
+26
+# internal_option {
+BLOCK_DESIGN_NAMING
+AUTO
+}
+# hierarchies {
+|
+}
+# macro_sequence
+
+# end
+# entity
 sensa_boton
 # storage
 db|practica3.(1).cnf
@@ -247,26 +267,6 @@ register4:inst6
 # lmf
 |altera|91sp2|quartus|lmf|maxplus2.lmf
 a36c8ec425c8a2589af98b2d4daabc3
-# macro_sequence
-
-# end
-# entity
-practica3
-# storage
-db|practica3.(0).cnf
-db|practica3.(0).cnf
-# case_insensitive
-# source_file
-practica3.bdf
-91b936e8c798c4a155c58284db849dc7
-26
-# internal_option {
-BLOCK_DESIGN_NAMING
-AUTO
-}
-# hierarchies {
-|
-}
 # macro_sequence
 
 # end
