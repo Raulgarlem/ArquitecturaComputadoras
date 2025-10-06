@@ -1,5 +1,5 @@
 Assembler report for practica3
-Sun Sep 28 19:56:09 2025
+Sun Oct 05 18:32:38 2025
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Sun Sep 28 19:56:09 2025 ;
+; Assembler Status      ; Successful - Sun Oct 05 18:32:38 2025 ;
 ; Revision Name         ; practica3                             ;
 ; Top-level Entity Name ; practica3                             ;
 ; Family                ; Cyclone IV E                          ;
@@ -93,7 +93,7 @@ applicable agreement for further details.
 +----------------+-------------------------------------------+
 ; Device         ; EP4CE22F17C6                              ;
 ; JTAG usercode  ; 0xFFFFFFFF                                ;
-; Checksum       ; 0x0013DF69                                ;
+; Checksum       ; 0x0013EE0E                                ;
 +----------------+-------------------------------------------+
 
 
@@ -103,13 +103,13 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Assembler
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Sun Sep 28 19:56:08 2025
+    Info: Processing started: Sun Oct 05 18:32:37 2025
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off practica3 -c practica3
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 0 warnings
     Info: Peak virtual memory: 253 megabytes
-    Info: Processing ended: Sun Sep 28 19:56:09 2025
+    Info: Processing ended: Sun Oct 05 18:32:38 2025
     Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:01
 

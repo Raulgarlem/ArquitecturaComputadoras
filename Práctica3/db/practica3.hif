@@ -185,39 +185,6 @@ a36c8ec425c8a2589af98b2d4daabc3
 
 # end
 # entity
-memoria
-# storage
-db|practica3.(6).cnf
-db|practica3.(6).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_insensitive
-# source_file
-memoria.vhd
-a726ab5846877d8f1490d16dcbe748
-5
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-}
-# hierarchies {
-memoria:inst4
-}
-# lmf
-|altera|91sp2|quartus|lmf|maxplus2.lmf
-a36c8ec425c8a2589af98b2d4daabc3
-# macro_sequence
-
-# end
-# entity
 register4
 # storage
 db|practica3.(7).cnf
@@ -251,6 +218,39 @@ a36c8ec425c8a2589af98b2d4daabc3
 
 # end
 # entity
+memoria
+# storage
+db|practica3.(6).cnf
+db|practica3.(6).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+memoria.vhd
+66e3cd730cde2cd067242a55c8ed8f
+5
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+}
+# hierarchies {
+memoria:inst4
+}
+# lmf
+|altera|91sp2|quartus|lmf|maxplus2.lmf
+a36c8ec425c8a2589af98b2d4daabc3
+# macro_sequence
+
+# end
+# entity
 practica3
 # storage
 db|practica3.(0).cnf
@@ -258,7 +258,7 @@ db|practica3.(0).cnf
 # case_insensitive
 # source_file
 practica3.bdf
-91b936e8c798c4a155c58284db849dc7
+a5d266f9d19250ea392bbb73bf7d717
 26
 # internal_option {
 BLOCK_DESIGN_NAMING

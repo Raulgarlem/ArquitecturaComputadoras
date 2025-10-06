@@ -3,51 +3,87 @@ TimeQuest Timing Analyzer Summary
 ------------------------------------------------------------
 
 Type  : Slow 1200mV 85C Model Setup 'clk'
-Slack : -1.722
-TNS   : -23.925
+Slack : -1.725
+TNS   : -23.950
+
+Type  : Slow 1200mV 85C Model Setup 'divider:inst|cuenta[23]'
+Slack : 0.244
+TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Hold 'clk'
-Slack : -0.111
-TNS   : -0.111
+Slack : -0.141
+TNS   : -0.141
+
+Type  : Slow 1200mV 85C Model Hold 'divider:inst|cuenta[23]'
+Slack : 0.353
+TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clk'
 Slack : -3.000
-TNS   : -29.000
+TNS   : -27.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'sensa_boton:inst1|reloj'
+Slack : -1.000
+TNS   : -10.000
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'divider:inst|cuenta[23]'
 Slack : -1.000
-TNS   : -6.000
+TNS   : -2.000
 
 Type  : Slow 1200mV 0C Model Setup 'clk'
-Slack : -1.388
-TNS   : -18.469
+Slack : -1.389
+TNS   : -18.481
+
+Type  : Slow 1200mV 0C Model Setup 'divider:inst|cuenta[23]'
+Slack : 0.330
+TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Hold 'clk'
-Slack : -0.097
-TNS   : -0.097
+Slack : -0.114
+TNS   : -0.114
+
+Type  : Slow 1200mV 0C Model Hold 'divider:inst|cuenta[23]'
+Slack : 0.319
+TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clk'
 Slack : -3.000
-TNS   : -29.000
+TNS   : -27.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'sensa_boton:inst1|reloj'
+Slack : -1.000
+TNS   : -10.000
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'divider:inst|cuenta[23]'
 Slack : -1.000
-TNS   : -6.000
+TNS   : -2.000
 
 Type  : Fast 1200mV 0C Model Setup 'clk'
-Slack : -0.549
-TNS   : -4.469
+Slack : -0.552
+TNS   : -4.510
+
+Type  : Fast 1200mV 0C Model Setup 'divider:inst|cuenta[23]'
+Slack : 0.578
+TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Hold 'clk'
-Slack : -0.085
-TNS   : -0.085
+Slack : -0.131
+TNS   : -0.131
+
+Type  : Fast 1200mV 0C Model Hold 'divider:inst|cuenta[23]'
+Slack : 0.174
+TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clk'
 Slack : -3.000
-TNS   : -30.532
+TNS   : -28.404
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'sensa_boton:inst1|reloj'
+Slack : -1.000
+TNS   : -10.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'divider:inst|cuenta[23]'
 Slack : -1.000
-TNS   : -6.000
+TNS   : -2.000
 
 ------------------------------------------------------------

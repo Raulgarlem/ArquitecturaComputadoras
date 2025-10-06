@@ -1,5 +1,5 @@
 Analysis & Synthesis report for practica3
-Sun Sep 28 19:56:04 2025
+Sun Oct 05 18:32:33 2025
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -42,16 +42,16 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun Sep 28 19:56:04 2025        ;
+; Analysis & Synthesis Status        ; Successful - Sun Oct 05 18:32:32 2025        ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; practica3                                    ;
 ; Top-level Entity Name              ; practica3                                    ;
 ; Family                             ; Cyclone IV E                                 ;
-; Total logic elements               ; 61                                           ;
-;     Total combinational functions  ; 60                                           ;
-;     Dedicated logic registers      ; 32                                           ;
-; Total registers                    ; 32                                           ;
-; Total pins                         ; 30                                           ;
+; Total logic elements               ; 67                                           ;
+;     Total combinational functions  ; 66                                           ;
+;     Dedicated logic registers      ; 36                                           ;
+; Total registers                    ; 36                                           ;
+; Total pins                         ; 28                                           ;
 ; Total virtual pins                 ; 0                                            ;
 ; Total memory bits                  ; 0                                            ;
 ; Embedded Multiplier 9-bit elements ; 0                                            ;
@@ -167,33 +167,33 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------------+-----------------+------------------------------------+-----------------------------------------+
 
 
-+---------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary             ;
-+---------------------------------------------+-----------+
-; Resource                                    ; Usage     ;
-+---------------------------------------------+-----------+
-; Estimated Total logic elements              ; 61        ;
-;                                             ;           ;
-; Total combinational functions               ; 60        ;
-; Logic element usage by number of LUT inputs ;           ;
-;     -- 4 input functions                    ; 18        ;
-;     -- 3 input functions                    ; 16        ;
-;     -- <=2 input functions                  ; 26        ;
-;                                             ;           ;
-; Logic elements by mode                      ;           ;
-;     -- normal mode                          ; 38        ;
-;     -- arithmetic mode                      ; 22        ;
-;                                             ;           ;
-; Total registers                             ; 32        ;
-;     -- Dedicated logic registers            ; 32        ;
-;     -- I/O registers                        ; 0         ;
-;                                             ;           ;
-; I/O pins                                    ; 30        ;
-; Maximum fan-out node                        ; clk~input ;
-; Maximum fan-out                             ; 26        ;
-; Total fan-out                               ; 286       ;
-; Average fan-out                             ; 1.88      ;
-+---------------------------------------------+-----------+
++--------------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                        ;
++---------------------------------------------+----------------------+
+; Resource                                    ; Usage                ;
++---------------------------------------------+----------------------+
+; Estimated Total logic elements              ; 67                   ;
+;                                             ;                      ;
+; Total combinational functions               ; 66                   ;
+; Logic element usage by number of LUT inputs ;                      ;
+;     -- 4 input functions                    ; 19                   ;
+;     -- 3 input functions                    ; 18                   ;
+;     -- <=2 input functions                  ; 29                   ;
+;                                             ;                      ;
+; Logic elements by mode                      ;                      ;
+;     -- normal mode                          ; 44                   ;
+;     -- arithmetic mode                      ; 22                   ;
+;                                             ;                      ;
+; Total registers                             ; 36                   ;
+;     -- Dedicated logic registers            ; 36                   ;
+;     -- I/O registers                        ; 0                    ;
+;                                             ;                      ;
+; I/O pins                                    ; 28                   ;
+; Maximum fan-out node                        ; register6:inst5|Q[5] ;
+; Maximum fan-out                             ; 24                   ;
+; Total fan-out                               ; 308                  ;
+; Average fan-out                             ; 1.95                 ;
++---------------------------------------------+----------------------+
 
 
 +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -201,9 +201,10 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------+--------------+
 ; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name          ; Library Name ;
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------+--------------+
-; |practica3                 ; 60 (0)            ; 32 (0)       ; 0           ; 0            ; 0       ; 0         ; 30   ; 0            ; |practica3                   ; work         ;
+; |practica3                 ; 66 (0)            ; 36 (0)       ; 0           ; 0            ; 0       ; 0         ; 28   ; 0            ; |practica3                   ; work         ;
 ;    |divider:inst|          ; 24 (24)           ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |practica3|divider:inst      ;              ;
-;    |memoria:inst4|         ; 33 (33)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |practica3|memoria:inst4     ;              ;
+;    |memoria:inst4|         ; 39 (39)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |practica3|memoria:inst4     ;              ;
+;    |register4:inst6|       ; 0 (0)             ; 4 (4)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |practica3|register4:inst6   ;              ;
 ;    |register6:inst5|       ; 2 (2)             ; 6 (6)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |practica3|register6:inst5   ;              ;
 ;    |sensa_boton:inst1|     ; 1 (1)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |practica3|sensa_boton:inst1 ;              ;
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------+--------------+
@@ -233,7 +234,7 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 32    ;
+; Total registers                              ; 36    ;
 ; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
@@ -248,7 +249,7 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output         ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------+
-; 64:1               ; 2 bits    ; 84 LEs        ; 10 LEs               ; 74 LEs                 ; No         ; |practica3|memoria:inst4|output[3] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |practica3|memoria:inst4|output[6] ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------+
 
 
@@ -258,7 +259,7 @@ Note: All latches listed above may not be present at the end of synthesis due to
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Sun Sep 28 19:56:03 2025
+    Info: Processing started: Sun Oct 05 18:32:31 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off practica3 -c practica3
 Info: Found 2 design units, including 1 entities, in source file carta_asm.vhd
     Info: Found design unit 1: carta_asm_2-Behavioral
@@ -287,8 +288,6 @@ Info: Found 2 design units, including 1 entities, in source file reg2bit.vhd
     Info: Found design unit 1: register2-Behavioral
     Info: Found entity 1: register2
 Info: Elaborating entity "practica3" for the top level hierarchy
-Warning: Pin "pin_name7" is missing source
-Warning: Pin "pin_name8" is missing source
 Info: Elaborating entity "sensa_boton" for hierarchy "sensa_boton:inst1"
 Warning (10492): VHDL Process Statement warning at maquina2.vhd(21): signal "clk" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
 Warning: Using design file divider.vhd, which is not specified as a design file for the current project, but contains definitions for 2 design units and 1 entities in project
@@ -309,18 +308,15 @@ Info (10041): Inferred latch for "output[5]" at memoria.vhd(13)
 Info (10041): Inferred latch for "output[6]" at memoria.vhd(13)
 Info (10041): Inferred latch for "output[7]" at memoria.vhd(13)
 Info: Elaborating entity "register4" for hierarchy "register4:inst6"
-Warning: Output pins are stuck at VCC or GND
-    Warning (13410): Pin "pin_name7" is stuck at GND
-    Warning (13410): Pin "pin_name8" is stuck at GND
 Info: Timing-Driven Synthesis is running
-Info: Implemented 95 device resources after synthesis - the final resource count might be different
+Info: Implemented 103 device resources after synthesis - the final resource count might be different
     Info: Implemented 4 input pins
-    Info: Implemented 26 output pins
-    Info: Implemented 65 logic cells
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 8 warnings
+    Info: Implemented 24 output pins
+    Info: Implemented 75 logic cells
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 3 warnings
     Info: Peak virtual memory: 244 megabytes
-    Info: Processing ended: Sun Sep 28 19:56:04 2025
-    Info: Elapsed time: 00:00:01
+    Info: Processing ended: Sun Oct 05 18:32:33 2025
+    Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:01
 
 

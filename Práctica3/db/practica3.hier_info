@@ -1,9 +1,6 @@
 |practica3
-pin_name7 <= <GND>
-pin_name8 <= <GND>
 reloj <= sensa_boton:inst1.reloj
 boton => sensa_boton:inst1.boton
-clk => sensa_boton:inst1.clk
 clk => divider:inst.clk
 div_clk <= divider:inst.div_clk
 dir_mem[0] <= register6:inst5.Q[0]
@@ -26,10 +23,10 @@ salidas[0] <= conector8a4x4:inst3.liga[0]
 salidas[1] <= conector8a4x4:inst3.liga[1]
 salidas[2] <= conector8a4x4:inst3.liga[2]
 salidas[3] <= conector8a4x4:inst3.liga[3]
-salidas_reg[0] <= conector8a4x4:inst3.salidas[0]
-salidas_reg[1] <= conector8a4x4:inst3.salidas[1]
-salidas_reg[2] <= conector8a4x4:inst3.salidas[2]
-salidas_reg[3] <= conector8a4x4:inst3.salidas[3]
+salidas_reg[0] <= register4:inst6.Q[0]
+salidas_reg[1] <= register4:inst6.Q[1]
+salidas_reg[2] <= register4:inst6.Q[2]
+salidas_reg[3] <= register4:inst6.Q[3]
 
 
 |practica3|sensa_boton:inst1
