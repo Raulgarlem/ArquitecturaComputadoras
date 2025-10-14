@@ -20,26 +20,6 @@ VHSM_ON
 -- Start VHDL Libraries --
 -- End VHDL Libraries --
 # entity
-practica3
-# storage
-db|practica3.(0).cnf
-db|practica3.(0).cnf
-# case_insensitive
-# source_file
-practica3.bdf
-ad54987843a639da2861dba81f76124
-26
-# internal_option {
-BLOCK_DESIGN_NAMING
-AUTO
-}
-# hierarchies {
-|
-}
-# macro_sequence
-
-# end
-# entity
 sensa_boton
 # storage
 db|practica3.(1).cnf
@@ -51,7 +31,7 @@ ON
 # case_insensitive
 # source_file
 maquina2.vhd
-47233959fb763d302b20ea994c33672
+9bbaaf3c38f4fa4f2dbaf8bf3727e8
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -84,7 +64,7 @@ ON
 # case_insensitive
 # source_file
 divider.vhd
-fecf3dae9d7979d637a37cfb53fe5119
+f9cb7e76d61142d343d8e657b918f58
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -117,7 +97,7 @@ ON
 # case_insensitive
 # source_file
 reg6bit.vhd
-457f8b6b444ec0a4c29cc66c3c858cb
+2c7a8d943029aea3cdbe6f571cb1f32
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -150,7 +130,7 @@ ON
 # case_insensitive
 # source_file
 conector4x6a6bit.vhd
-cab1f16e41c7177af3abd67d1e40daa6
+94a3b7454a2c248b251d64631dd09e3b
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -183,7 +163,7 @@ ON
 # case_insensitive
 # source_file
 conector8a4x4bit.vhd
-fc1eb78b806d4f19d1d678154fc4cc3
+caad23ddb9c5835dada4996a149652c
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -205,39 +185,6 @@ a36c8ec425c8a2589af98b2d4daabc3
 
 # end
 # entity
-memoria
-# storage
-db|practica3.(6).cnf
-db|practica3.(6).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_insensitive
-# source_file
-memoria.vhd
-a726ab5846877d8f1490d16dcbe748
-5
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-}
-# hierarchies {
-memoria:inst4
-}
-# lmf
-|altera|91sp2|quartus|lmf|maxplus2.lmf
-a36c8ec425c8a2589af98b2d4daabc3
-# macro_sequence
-
-# end
-# entity
 register4
 # storage
 db|practica3.(7).cnf
@@ -249,7 +196,7 @@ ON
 # case_insensitive
 # source_file
 reg3bit.vhd
-ec1997991442fde4d3a3226c6d2bcde9
+4c2a29acc94d150ca32d0259e3fde59
 5
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -263,6 +210,59 @@ ON
 }
 # hierarchies {
 register4:inst6
+}
+# lmf
+|altera|91sp2|quartus|lmf|maxplus2.lmf
+a36c8ec425c8a2589af98b2d4daabc3
+# macro_sequence
+
+# end
+# entity
+practica3
+# storage
+db|practica3.(0).cnf
+db|practica3.(0).cnf
+# case_insensitive
+# source_file
+practica3.bdf
+4c75bdc72b72bfd7e954a63bba8225c1
+26
+# internal_option {
+BLOCK_DESIGN_NAMING
+AUTO
+}
+# hierarchies {
+|
+}
+# macro_sequence
+
+# end
+# entity
+memoria
+# storage
+db|practica3.(6).cnf
+db|practica3.(6).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+memoria.vhd
+207a63ca7e77a631aac2fd23e182a4c0
+5
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+}
+# hierarchies {
+memoria:inst4
 }
 # lmf
 |altera|91sp2|quartus|lmf|maxplus2.lmf
