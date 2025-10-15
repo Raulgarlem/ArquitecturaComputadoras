@@ -51,17 +51,29 @@ set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
 set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Root Region"
-set_global_assignment -name VHDL_FILE memoria.vhd
 set_global_assignment -name VHDL_FILE logica_secuenciador.vhd
 set_global_assignment -name BDF_FILE practica4.bdf
 set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "2.5 V"
-set_location_assignment PIN_L3 -to pin_name6
-set_location_assignment PIN_B1 -to pin_name5
-set_location_assignment PIN_F3 -to pin_name4
-set_location_assignment PIN_D1 -to pin_name3
 set_global_assignment -name MISC_FILE "C:/quartus_nuevo/4/practica4.dpf"
-set_location_assignment PIN_A2 -to pin_name
-set_location_assignment PIN_A3 -to pin_name1
-set_location_assignment PIN_A4 -to pin_name2
 set_global_assignment -name VHDL_FILE multi12.vhd
+set_global_assignment -name VHDL_FILE mPCregister.vhd
+set_global_assignment -name VHDL_FILE incrementador.vhd
+set_global_assignment -name MISC_FILE "C:/Users/User/Downloads/4/practica4.dpf"
+set_global_assignment -name BDF_FILE secuenciador.bdf
+set_global_assignment -name VHDL_FILE memoriaASM.vhd
+set_global_assignment -name VHDL_FILE mux_Seleccion.vhd
+set_global_assignment -name VHDL_FILE showOutput.vhd
+set_location_assignment PIN_R8 -to clk
+set_location_assignment PIN_J15 -to reset
+set_location_assignment PIN_D1 -to state[3]
+set_location_assignment PIN_F3 -to state[2]
+set_location_assignment PIN_B1 -to state[1]
+set_location_assignment PIN_L3 -to state[0]
+set_location_assignment PIN_A15 -to salidas[3]
+set_location_assignment PIN_A13 -to salidas[2]
+set_location_assignment PIN_B13 -to salidas[1]
+set_location_assignment PIN_A11 -to salidas[0]
+set_global_assignment -name VHDL_FILE registrTransformacion.vhd
+set_global_assignment -name VHDL_FILE registroTransformacion.vhd
+set_global_assignment -name VHDL_FILE registroInterrupciones.vhd
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
