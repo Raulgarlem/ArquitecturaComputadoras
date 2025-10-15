@@ -5,7 +5,6 @@ use IEEE.NUMERIC_STD.ALL;
 entity memoriaASM is
     Port (
         direccion   : in  STD_LOGIC_VECTOR(11 downto 0);  -- 12 bits
-        PL_n		: in  STD_LOGIC;
         liga        : out STD_LOGIC_VECTOR(11 downto 0);  -- 12 bits
         instruccion : out STD_LOGIC_VECTOR(1 downto 0);   -- 2 bits
         prueba      : out STD_LOGIC_VECTOR(1 downto 0);   -- 2 bits

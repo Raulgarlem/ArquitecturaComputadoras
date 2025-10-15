@@ -20,35 +20,23 @@ applicable agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 144 112)
+	(rect 16 16 112 112)
 	(text "registroTransformacion" (rect 5 0 118 12)(font "Arial" ))
 	(text "inst" (rect 8 80 25 92)(font "Arial" ))
 	(port
-		(pt 0 32)
-		(input)
-		(text "MAP_n" (rect 0 0 34 12)(font "Arial" ))
-		(text "MAP_n" (rect 21 27 55 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32)(line_width 1))
-	)
-	(port
-		(pt 128 32)
+		(pt 96 32)
 		(output)
 		(text "D[11..0]" (rect 0 0 40 12)(font "Arial" ))
-		(text "D[11..0]" (rect 67 27 107 39)(font "Arial" ))
-		(line (pt 128 32)(pt 112 32)(line_width 3))
+		(text "D[11..0]" (rect 35 27 75 39)(font "Arial" ))
+		(line (pt 96 32)(pt 80 32)(line_width 3))
 	)
 	(parameter
 		"ADDR0"
 		"000000000011"
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
-	(parameter
-		"ADDR_DEFAULT"
-		"000000001000"
-		""
-		(type "PARAMETER_UNSIGNED_BIN")	)
 	(drawing
-		(rectangle (rect 16 16 112 80)(line_width 1))
+		(rectangle (rect 16 16 80 80)(line_width 1))
 	)
-	(annotation_block (parameter)(rect 144 -64 244 16))
+	(annotation_block (parameter)(rect 112 -64 212 16))
 )
