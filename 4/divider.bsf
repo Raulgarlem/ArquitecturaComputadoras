@@ -20,8 +20,8 @@ applicable agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 216 112)
-	(text "showOutput" (rect 5 0 62 12)(font "Arial" ))
+	(rect 16 16 112 112)
+	(text "divider" (rect 5 0 38 12)(font "Arial" ))
 	(text "inst" (rect 8 80 25 92)(font "Arial" ))
 	(port
 		(pt 0 32)
@@ -31,20 +31,13 @@ applicable agreement for further details.
 		(line (pt 0 32)(pt 16 32)(line_width 1))
 	)
 	(port
-		(pt 0 48)
-		(input)
-		(text "valor12[11..0]" (rect 0 0 68 12)(font "Arial" ))
-		(text "valor12[11..0]" (rect 21 43 89 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48)(line_width 3))
-	)
-	(port
-		(pt 200 32)
+		(pt 96 32)
 		(output)
-		(text "actualState[3..0]" (rect 0 0 81 12)(font "Arial" ))
-		(text "actualState[3..0]" (rect 98 27 179 39)(font "Arial" ))
-		(line (pt 200 32)(pt 184 32)(line_width 3))
+		(text "div_clk" (rect 0 0 35 12)(font "Arial" ))
+		(text "div_clk" (rect 40 27 75 39)(font "Arial" ))
+		(line (pt 96 32)(pt 80 32)(line_width 1))
 	)
 	(drawing
-		(rectangle (rect 16 16 184 80)(line_width 1))
+		(rectangle (rect 16 16 80 80)(line_width 1))
 	)
 )

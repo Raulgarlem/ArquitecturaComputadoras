@@ -43,7 +43,7 @@ begin
 
             when "011" =>  -- SCC con CC=1
                 Selector  <= '0';
-                PL        <= '0';
+                PL        <= '1';
                 MAP_CTRL  <= '1';
                 VECT_CTRL <= '1';
 

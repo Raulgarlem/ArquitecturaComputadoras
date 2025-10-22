@@ -35,6 +35,21 @@ applicable agreement for further details.
 		"000000000011"
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"ADDR1"
+		"000000001000"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"ADDR2"
+		"000000001101"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"SELECT_ADDR"
+		"2"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
 		(rectangle (rect 16 16 80 80)(line_width 1))
 	)

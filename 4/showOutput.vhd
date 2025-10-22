@@ -4,14 +4,18 @@ library IEEE;
 	 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 	 
  entity showOutput is
-		 Port ( valor12 : in  STD_LOGIC_VECTOR (11 downto 0);
+		 Port ( 
+		 clk : in  STD_LOGIC;
+		 valor12 : in  STD_LOGIC_VECTOR (11 downto 0);
 		 actualState : out  STD_LOGIC_VECTOR (3 downto 0));
  end showOutput;
  
  architecture Behavioral of showOutput is
 		begin
-			process(valor12)
+			process(clk,valor12)
 				begin
-					actualState <= valor12(3 downto 0);
+					if rising_edge (clk) then
+						actualState <= valor12(3 downto 0);
+						end if;
 			end process;
  end Behavioral;

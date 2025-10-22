@@ -43,13 +43,15 @@ begin
     process(direccion)
     variable temp : STD_LOGIC_VECTOR(20 downto 0);
     begin
-        temp := memoria(to_integer(unsigned(direccion)));
+		--if rising_edge (clk) then
+			temp := memoria(to_integer(unsigned(direccion)));
 
-        liga        <= temp(20 downto 9); 	-- 12 bits
-        instruccion <= temp(8 downto 7); 	-- 2 bits
-        prueba      <= temp(6 downto 5);	-- 2 bits
-        VF          <= temp(4);            	-- 1 bit
-        salidas     <= temp(3 downto 0);   	-- 4 bits completos
+			liga        <= temp(20 downto 9); 	-- 12 bits
+			instruccion <= temp(8 downto 7); 	-- 2 bits
+			prueba      <= temp(6 downto 5);	-- 2 bits
+			VF          <= temp(4);            	-- 1 bit
+			salidas     <= temp(3 downto 0);   	-- 4 bits completos
+		--end if;
     end process;
 end Behavioral;
 

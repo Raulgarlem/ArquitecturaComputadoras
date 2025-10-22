@@ -35,6 +35,16 @@ applicable agreement for further details.
 		"000000000110"
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"ADDR_IRQ1"
+		"000000001011"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"SELECT_ADDR"
+		"1"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
 		(rectangle (rect 16 16 80 80)(line_width 1))
 	)

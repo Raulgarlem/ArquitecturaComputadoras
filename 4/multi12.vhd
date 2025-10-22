@@ -14,10 +14,10 @@ architecture Behavioral of mux_direccion_12bits is
 begin
     process(mPC, D, Selector)
     begin
-        if Selector = '0' then
-            Y <= mPC;
-        else
-            Y <= D;
-        end if;
+			if Selector = '0' then
+				Y <= mPC;
+			else
+				Y <= D;
+			end if;
     end process;
 end Behavioral;
