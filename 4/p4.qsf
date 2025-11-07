@@ -18,14 +18,14 @@
 #
 # Quartus II
 # Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-# Date created = 20:51:03  November 05, 2025
+# Date created = 11:34:38  October 22, 2025
 #
 # -------------------------------------------------------------------------- #
 #
 # Notes:
 #
 # 1) The default values for assignments are stored in the file:
-#		p6_assignment_defaults.qdf
+#		p4_assignment_defaults.qdf
 #    If this file doesn't exist, see file:
 #		assignment_defaults.qdf
 #
@@ -38,42 +38,32 @@
 
 set_global_assignment -name FAMILY "Cyclone IV E"
 set_global_assignment -name DEVICE EP4CE22F17C6
-set_global_assignment -name TOP_LEVEL_ENTITY top_p6
+set_global_assignment -name TOP_LEVEL_ENTITY p4
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION "9.1 SP2"
-set_global_assignment -name PROJECT_CREATION_TIME_DATE "20:51:03  NOVEMBER 05, 2025"
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "11:34:38  OCTOBER 22, 2025"
 set_global_assignment -name LAST_QUARTUS_VERSION "9.1 SP2"
 set_global_assignment -name USE_GENERATED_PHYSICAL_CONSTRAINTS OFF -section_id eda_blast_fpga
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
-set_global_assignment -name NOMINAL_CORE_SUPPLY_VOLTAGE 1.2V
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
-set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Root Region"
-set_global_assignment -name TIMEQUEST_MULTICORNER_ANALYSIS ON
-set_global_assignment -name TIMEQUEST_DO_CCPP_REMOVAL ON
+set_global_assignment -name NOMINAL_CORE_SUPPLY_VOLTAGE 1.0V
+set_global_assignment -name VHDL_FILE conectormemoria.vhd
+set_global_assignment -name SOURCE_FILE contador12.cmp
+set_global_assignment -name VHDL_FILE contador12.vhd
+set_global_assignment -name VHDL_FILE contador12_inst.vhd
 set_global_assignment -name VHDL_FILE divider.vhd
+set_global_assignment -name VHDL_FILE incrementador.vhd
+set_global_assignment -name VHDL_FILE incrementador_reloj.vhd
+set_global_assignment -name VHDL_FILE logica_secuenciador.vhd
+set_global_assignment -name VHDL_FILE memoriaASM.vhd
+set_global_assignment -name VHDL_FILE mPCregister.vhd
+set_global_assignment -name VHDL_FILE multi12.vhd
+set_global_assignment -name VHDL_FILE mux_registros.vhd
+set_global_assignment -name VHDL_FILE mux_Seleccion.vhd
+set_global_assignment -name VHDL_FILE outRegister.vhd
+set_global_assignment -name BDF_FILE practica4.bdf
+set_global_assignment -name VHDL_FILE reg1bit.vhd
+set_global_assignment -name VHDL_FILE registroInterrupciones.vhd
+set_global_assignment -name VHDL_FILE registroTransformacion.vhd
+set_global_assignment -name BDF_FILE secuenciador.bdf
 set_global_assignment -name VHDL_FILE sensa_boton.vhd
-set_global_assignment -name VHDL_FILE micro68HC11.vhd
-set_global_assignment -name VHDL_FILE rom_p6.vhd
-set_global_assignment -name VHDL_FILE top_p6.vhd
-set_global_assignment -name BDF_FILE p6.bdf
-set_global_assignment -name MISC_FILE "C:/quartus_nuevo/6/p6.dpf"
-set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "2.5 V"
-set_location_assignment PIN_L3 -to leds[7]
-set_location_assignment PIN_B1 -to leds[6]
-set_location_assignment PIN_F3 -to leds[5]
-set_location_assignment PIN_D1 -to leds[4]
-set_location_assignment PIN_A11 -to leds[3]
-set_location_assignment PIN_B13 -to leds[2]
-set_location_assignment PIN_A13 -to leds[1]
-set_location_assignment PIN_A15 -to leds[0]
-set_location_assignment PIN_J15 -to reset_n
-set_location_assignment PIN_M15 -to sw[1]
-set_location_assignment PIN_B9 -to sw[0]
-set_location_assignment PIN_M1 -to btn_irq
-set_location_assignment PIN_T8 -to btn_xirq
-set_location_assignment PIN_R8 -to clk50
-set_global_assignment -name VHDL_FILE Vhdl1.vhd
-set_global_assignment -name VECTOR_WAVEFORM_FILE sim.vwf
-set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name VHDL_FILE showOutput.vhd
