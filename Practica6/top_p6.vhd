@@ -4,18 +4,19 @@ use ieee.numeric_std.all;
 
 entity top_p6 is
   port(
-    clk50   : in  std_logic;
-    reset_n : in  std_logic;
-    sw      : in  std_logic_vector(1 downto 0); -- para escoger 10h,11h,12h
-    btn_irq  : in std_logic;
-    btn_xirq : in std_logic;
-    leds    : out std_logic_vector(7 downto 0)
+    clk50   	: in  std_logic;
+    reset_n 	: in  std_logic;
+    sw      	: in  std_logic_vector(1 downto 0); -- para escoger 10h,11h,12h
+    btn_irq		: in std_logic;
+    btn_xirq	: in std_logic;
+    btn_step	: in std_logic;
+    leds		: out std_logic_vector(7 downto 0)
   );
 end top_p6;
 
 architecture Behavioral of top_p6 is
 
-  -- reloj lento opcional
+  -- reloj lento
   signal clk    : std_logic;
 
   -- señales CPU
@@ -35,18 +36,65 @@ architecture Behavioral of top_p6 is
   signal Yl_s         : unsigned(7 downto 0);
   signal flags_s      : std_logic_vector(7 downto 0);
 
+-- ==== Señales (declarar arriba, ANTES de begin) ====
+signal s0, s1      : std_logic := '1';  -- sincronizador (KEY1 activo en bajo)
+signal s_prev      : std_logic := '1';  -- muestra anterior (sync)
+signal step_pulse  : std_logic := '0';  -- pulso de 1 clk para la CPU (CE)
+signal led_cnt     : unsigned(19 downto 0) := (others => '0');  -- ~20 ms @50MHz
+signal step_led    : std_logic := '0';  -- versión "visible" del pulso (solo debug)
+
 begin
 
   -- (opcional) pasar clk50 directo
   clk <= clk50;
 
+
+
+-- ==== Sincroniza el botón al reloj de la CPU (usa el MISMO clk que tu CPU) ====
+process(clk50) begin
+  if rising_edge(clk50) then
+    s0 <= btn_step;   -- pin KEY1 (activo en bajo)
+    s1 <= s0;         -- ya sincronizado a clk50
+  end if;
+end process;
+
+-- ==== Detector de flanco (1->0 porque es activo en bajo) + pulso 1 ciclo ====
+process(clk50) begin
+  if rising_edge(clk50) then
+    s_prev <= s1;
+    if (s_prev = '1' and s1 = '0') then
+      step_pulse <= '1';      -- 1 ciclo (20 ns) para la CPU
+    else
+      step_pulse <= '0';
+    end if;
+  end if;
+end process;
+
+-- ==== Estirador para ver el pulso en un LED (~20 ms) ====
+process(clk50) begin
+  if rising_edge(clk50) then
+    if step_pulse = '1' then
+      led_cnt  <= to_unsigned(1_000_000, led_cnt'length); -- ~20 ms @50MHz
+      step_led <= '1';
+    elsif led_cnt /= 0 then
+      led_cnt  <= led_cnt - 1;
+      step_led <= '1';
+    else
+      step_led <= '0';
+    end if;
+  end if;
+end process;
+
+
+
   -- instanciar CPU
   u_cpu: entity work.micro68HC11
     port map(
-      clk   => clk,
+      clk   => clk50,
       reset => not reset_n,
       nIRQ  => btn_irq,
       nXIRQ => btn_xirq,
+      ce    => step_pulse,
       Data_in  => dato_mem,
       Data_out => data_out_cpu,
       Dir      => dir_cpu,
@@ -96,7 +144,11 @@ begin
         end if;
     end case;
 
-    leds <= std_logic_vector(show);
+	leds <= std_logic_vector(show);
+    --leds <= std_logic_vector(pc_low_s);
+	--leds <= std_logic_vector(e_presente);
+    --leds(7) <= step_led;
+	--leds(6 downto 0) <= std_logic_vector(pc_low_s(7 downto 1));
   end process;
 
 end Behavioral;
