@@ -39,16 +39,17 @@ architecture Behavioral of micro68HC11 is
   --signal PCH: unsigned (7 downto 0) := X"00";
   --signal PCL: unsigned (7 downto 0) := X"14";
   signal PC: unsigned (15 downto 0):= X"C000";  -- o X"F000"
-signal PCL: unsigned (7 downto 0) := X"00";
-signal PCH: unsigned (7 downto 0) := X"C0";   -- o X"F0"
+  signal PCL: unsigned (7 downto 0) := X"00";
+  signal PCH: unsigned (7 downto 0) := X"C0";   -- o X"F0"
   signal SPH: unsigned (7 downto 0) := X"FF";
   signal SPL: unsigned (7 downto 0) := X"FF";
   signal SP: unsigned (15 downto 0):= X"FFFF";
 
   -- Interrupciones
-  signal microI: unsigned (11 downto 0) := X"333";
-  signal microX: unsigned (11 downto 0) := X"444";
-  signal IntRI, IntRX: unsigned (15 downto 0);
+  signal microI: unsigned (11 downto 0) := X"330";
+  signal microX: unsigned (11 downto 0) := X"440";
+  signal IntRI: unsigned (15 downto 0):=X"0070";
+  signal IntRX: unsigned (15 downto 0):=x"0080";
   signal IRQ, XIRQ: STD_LOGIC := '0';
 
   -- MUL
@@ -295,7 +296,7 @@ begin
 						end if;
 						e_siguiente <= e_presente + 1;
 					when X"A73" => --
-						Data_out <= A; 
+						Data_out <= A;
 						nRW <= '0';
 						e_siguiente <= e_presente + 1;
 					when X"A74" => --

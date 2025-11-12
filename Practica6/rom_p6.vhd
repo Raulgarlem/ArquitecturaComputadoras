@@ -14,22 +14,24 @@ signal data_int : unsigned(7 downto 0);
 begin
   process(addr)
   begin
+  
+    
     case addr is
     -- Programa principal ahora en 0xC000+
     when x"C000" => data_int <= x"86"; --14 -- LDAA #$FF
-    when x"C001" => data_int <= x"FF"; --15
+    when x"C001" => data_int <= x"AA"; --15
     
     when x"C002" => data_int <= x"C6"; --16 -- LDAB #$01
     when x"C003" => data_int <= x"01"; --17
     
     when x"C004" => data_int <= x"CE"; --18 -- LDX #$0010
     when x"C005" => data_int <= x"00"; --19
-    when x"C006" => data_int <= x"10"; --1A
+    when x"C006" => data_int <= x"50"; --1A
     
     when x"C007" => data_int <= x"1B"; --1B -- ABA
     
     when x"C008" => data_int <= x"26"; --1C -- BNE ET1
-    when x"C009" => data_int <= x"03"; --1D
+    when x"C009" => data_int <= x"04"; --1D
     
     when x"C00A" => data_int <= x"A7"; --1E -- STAA 0,X
     when x"C00B" => data_int <= x"00"; --1F
@@ -58,35 +60,23 @@ begin
     when x"C01A" => data_int <= x"FE"; --2E
     
     -- Drivers de interrupción (mantener en 0x0050 y 0x0060)
-    when x"0050" => data_int <= X"CE";
-    when x"0051" => data_int <= X"00";
-    when x"0052" => data_int <= X"20";
-    when x"0053" => data_int <= X"B6";
-    when x"0054" => data_int <= X"00";
-    when x"0055" => data_int <= X"30";
-    when x"0056" => data_int <= X"A7";
-    when x"0057" => data_int <= X"00";
-    when x"0058" => data_int <= X"3B";
+    when x"0070" => data_int <= X"CE";
+    when x"0071" => data_int <= X"00";
+    when x"0072" => data_int <= X"20";
+    when x"0073" => data_int <= X"86";
+    when x"0074" => data_int <= X"30";
+    when x"0075" => data_int <= X"A7";
+    when x"0076" => data_int <= X"00";
+    when x"0077" => data_int <= X"3B";
     
-    when x"0060" => data_int <= X"CE";
-    when x"0061" => data_int <= X"00";
-    when x"0062" => data_int <= X"30";
-    when x"0063" => data_int <= X"F6";
-    when x"0064" => data_int <= X"00";
-    when x"0065" => data_int <= X"20";
-    when x"0066" => data_int <= X"E7";
-    when x"0067" => data_int <= X"00";
-    when x"0068" => data_int <= X"3B";
-    
-    -- Vectores de interrupción
-    when x"00F2" => data_int <= X"00";
-    when x"00F3" => data_int <= X"60";
-    when x"00F4" => data_int <= X"00";
-    when x"00F5" => data_int <= X"50";
-    
-    -- Vector RESET ahora apunta a 0xC000
-    when x"00FE" => data_int <= X"C0";
-    when x"00FF" => data_int <= X"00";
+    when x"0080" => data_int <= X"CE";
+    when x"0081" => data_int <= X"00";
+    when x"0082" => data_int <= X"30";
+    when x"0083" => data_int <= X"C6";
+    when x"0084" => data_int <= X"20";
+    when x"0085" => data_int <= X"E7";
+    when x"0086" => data_int <= X"00";
+    when x"0087" => data_int <= X"3B";
     
     when others => data_int <= x"00";
 end case;

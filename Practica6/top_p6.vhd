@@ -16,7 +16,13 @@ end top_p6;
 
 architecture Behavioral of top_p6 is
 
-  -- reloj lento
+constant SUM : unsigned (15 downto 0) := X"0010" ; 
+constant MULH : unsigned (15 downto 0) := X"0011" ; 
+constant MULL : unsigned (15 downto 0) := X"0012" ; 
+constant INTX : unsigned (15 downto 0) := X"0030" ; 
+constant INTI : unsigned (15 downto 0) := X"0020" ;
+
+ -- reloj lento
   signal clk    : std_logic;
   signal clk_counter : unsigned(25 downto 0) := (others => '0');
   signal clk_slow    : std_logic := '0';
@@ -157,6 +163,7 @@ end process;
       a_dout => data_from_ram,
       a_we   => ram_we,
       -- Puerto B: LEDs
+      
       b_addr => ram_b_addr,
       b_dout => ram_b_dout
     );
@@ -165,15 +172,10 @@ end process;
   -- Si la CPU lee (nRW='1') y la dirección es $00xx, servimos RAM; en otro caso ROM
   data_in_cpu <= data_from_ram when (cs_ram='1' and nRW_cpu='1') else data_from_rom;
 
-  -- ============ Selección de direcciones para LEDs ($10/$11/$12) ============
-  with sw select
-    ram_b_addr <= x"10" when "00",
-                  x"11" when "01",
-                  x"12" when others;
+
 
   -- Muestra el byte leído por el puerto B (puedes OR con step_led si quieres)
   --leds <= std_logic_vector(pc_low_s); --Muestra direcciones PC
-	      -- A (nibble alto)
 	--with e_pres_s select
   --leds <= --std_logic_vector(A_s) when x"61",
 			--std_logic_vector(A_s) when x"62",
@@ -181,6 +183,14 @@ end process;
 			--std_logic_vector(e_pres_s) when others;
   --leds(7) <= step_led;
   --leds(6 downto 0) <= std_logic_vector(ram_b_dout(6 downto 0));
-  --leds <= std_logic_vector(e_pres_s);
-  leds <= std_logic_vector(ram_b_dout);  -- muestra el contenido de esa celda
+  --leds <= std_logic_vector(data_from_rom);
+  --leds <= std_logic_vector(data_out_cpu);
+  --leds <= std_logic_vector(show);
+  with sw select
+  ram_b_addr <= x"50" when "00",
+                x"51" when "01",
+                x"52" when others;
+                
+  leds(0) <= std_logic_vector(ram_we);  -- muestra el contenido de esa celda_vector(b_dout);  -- muestra el contenido de esa celda
+  
 end Behavioral;
