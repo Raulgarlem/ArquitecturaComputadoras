@@ -182,5 +182,5 @@ end process;
   --leds(7) <= step_led;
   --leds(6 downto 0) <= std_logic_vector(ram_b_dout(6 downto 0));
   --leds <= std_logic_vector(e_pres_s);
-  leds <= std_logic_vector(e_pres_s);  -- muestra el contenido de esa celda
+  leds <= std_logic_vector(ram_b_dout);  -- muestra el contenido de esa celda
 end Behavioral;
