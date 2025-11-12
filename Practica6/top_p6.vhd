@@ -48,8 +48,6 @@ begin
   -- (opcional) pasar clk50 directo
   clk <= clk50;
 
-
-
 -- ==== Sincroniza el botón al reloj de la CPU (usa el MISMO clk que tu CPU) ====
 process(clk50) begin
   if rising_edge(clk50) then
@@ -144,11 +142,12 @@ end process;
         end if;
     end case;
 
-	leds <= std_logic_vector(show);
+	
     --leds <= std_logic_vector(pc_low_s);
 	--leds <= std_logic_vector(e_presente);
     --leds(7) <= step_led;
 	--leds(6 downto 0) <= std_logic_vector(pc_low_s(7 downto 1));
   end process;
+leds <= std_logic_vector(e_pres_s);
 
 end Behavioral;

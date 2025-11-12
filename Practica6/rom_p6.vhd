@@ -32,7 +32,7 @@ begin
 
       -- BNE ET1 ? estados 260, 261, 262, 263
       when x"001C" => datao <= x"26";
-      when x"001D" => datao <= x"02"; -- salto relativo (+2)
+      when x"001D" => datao <= x"03"; -- salto relativo (+2)
 
       -- STAA 0,X ? estados A700, A701
       when x"001E" => datao <= x"A7";
@@ -69,7 +69,63 @@ begin
       when x"002D" => datao <= x"20";
       when x"002E" => datao <= x"FE"; -- salto relativo (-2)
 
-      when others => datao <= x"00";
+      
+      
+      
+      -- ========================================
+        -- DRIVER_X: Interrupción XIRQ
+        -- Vector de interrupción en $0050
+        -- ========================================
+        when x"0050" => datao <= X"CE";  -- LDX #$0020
+        when x"0051" => datao <= X"00";
+        when x"0052" => datao <= X"20";
+        
+        when x"0053" => datao <= X"B6";  -- LDAA extended $0030
+        when x"0054" => datao <= X"00";
+        when x"0055" => datao <= X"30";
+        
+        when x"0056" => datao <= X"A7";  -- STAA 0,X
+        when x"0057" => datao <= X"00";
+        
+        when x"0058" => datao <= X"3B";  -- RTI
+        
+        -- ========================================
+        -- DRIVER_Y: Interrupción IRQ
+        -- Vector de interrupción en $0060
+        -- ========================================
+        when x"0060" => datao <= X"CE";  -- LDX #$0030
+        when x"0061" => datao <= X"00";
+        when x"0062" => datao <= X"30";
+        
+        when x"0063" => datao <= X"F6";  -- LDAB extended $0020
+        when x"0064" => datao <= X"00";
+        when x"0065" => datao <= X"20";
+        
+        when x"0066" => datao <= X"E7";  -- STAB 0,X
+        when x"0067" => datao <= X"00";
+       
+        when x"0068" => datao <= X"3B";  -- RTI
+        
+        
+         -- ========================================
+        -- Vectores de Interrupción (Parte alta de memoria)
+        -- Típicamente en $FFF0-$FFFF para 6811
+        -- ========================================
+        -- Vector XIRQ en $FFF4-$FFF5
+        when x"00F4" => datao <= X"00";  -- Dirección alta del DRIVER_X
+        when x"00F5" => datao <= X"50";  -- Dirección baja del DRIVER_X ($0050)
+        
+        -- Vector IRQ en $FFF2-$FFF3
+        when x"00F2" => datao <= X"00";  -- Dirección alta del DRIVER_Y
+        when x"00F3" => datao <= X"60";  -- Dirección baja del DRIVER_Y ($0060)
+        
+        -- Vector RESET en $FFFE-$FFFF
+        when x"00FE" => datao <= X"00";  -- Dirección alta inicio programa
+        when x"00FF" => datao <= X"14";  -- Dirección baja inicio programa ($0014)
+        
+        ------------------------------------------
+        when others => datao <= x"00";
+        
     end case;
   end process;
 end Behavioral;
