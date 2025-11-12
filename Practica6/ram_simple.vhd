@@ -2,27 +2,35 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity ram_simple is
+entity ram_dp8x256 is
   port(
-    clk   : in  std_logic;
-    we    : in  std_logic;  -- write enable (cuando nRW='0')
-    addr  : in  unsigned(15 downto 0);
-    din   : in  unsigned(7 downto 0);
-    dout  : out unsigned(7 downto 0)
+    clk     : in  std_logic;
+    -- Puerto A: CPU
+    a_addr  : in  unsigned(7 downto 0);
+    a_din   : in  unsigned(7 downto 0);
+    a_dout  : out unsigned(7 downto 0);
+    a_we    : in  std_logic;                -- '1' escribe en flanco
+    -- Puerto B: Debug/LEDs
+    b_addr  : in  unsigned(7 downto 0);
+    b_dout  : out unsigned(7 downto 0)
   );
-end ram_simple;
+end ram_dp8x256;
 
-architecture Behavioral of ram_simple is
-  type ram_type is array (0 to 255) of unsigned(7 downto 0);
-  signal ram : ram_type := (others => x"00");
+architecture rtl of ram_dp8x256 is
+  type ram_t is array (0 to 255) of unsigned(7 downto 0);
+  signal mem : ram_t := (others => (others => '0'));
 begin
+  -- Puerto A (sincrónico: write-first)
   process(clk)
   begin
     if rising_edge(clk) then
-      if we = '1' then
-        ram(to_integer(addr(7 downto 0))) <= din;
+      if a_we = '1' then
+        mem(to_integer(a_addr)) <= a_din;
       end if;
-      dout <= ram(to_integer(addr(7 downto 0)));
+      a_dout <= mem(to_integer(a_addr));
     end if;
   end process;
-end Behavioral;
+
+  -- Puerto B (asíncrono de solo lectura —válido para debug)
+  b_dout <= mem(to_integer(b_addr));
+end rtl;

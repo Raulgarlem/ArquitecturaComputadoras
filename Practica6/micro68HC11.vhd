@@ -28,7 +28,7 @@ architecture Behavioral of micro68HC11 is
   signal e_siguiente: unsigned(11 downto 0);
 
   -- PC
-  signal PC: unsigned (15 downto 0):= X"0014";
+  --signal PC: unsigned (15 downto 0):= X"0014";
 
   -- Registros y Banderas
   signal estados: STD_LOGIC_VECTOR (7 downto 0):= X"FF";
@@ -36,10 +36,14 @@ architecture Behavioral of micro68HC11 is
   signal Aux: unsigned (15 downto 0);
 
   -- Stack
-  signal PCH: unsigned (7 downto 0) := X"00";
-  signal PCL: unsigned (7 downto 0) := X"14";
+  --signal PCH: unsigned (7 downto 0) := X"00";
+  --signal PCL: unsigned (7 downto 0) := X"14";
+  signal PC: unsigned (15 downto 0):= X"C000";  -- o X"F000"
+signal PCL: unsigned (7 downto 0) := X"00";
+signal PCH: unsigned (7 downto 0) := X"C0";   -- o X"F0"
   signal SPH: unsigned (7 downto 0) := X"FF";
   signal SPL: unsigned (7 downto 0) := X"FF";
+  signal SP: unsigned (15 downto 0):= X"FFFF";
 
   -- Interrupciones
   signal microI: unsigned (11 downto 0) := X"333";
@@ -62,399 +66,495 @@ begin
   process(clk, reset)
   begin
     if (reset = '1') then
+      --e_presente  <= X"000";
+      --e_siguiente <= X"000";
+      --PC          <= X"0014";
       e_presente  <= X"000";
-      e_siguiente <= X"000";
-      PC          <= X"0014";
+    e_siguiente <= X"000";
+    PC          <= X"C000";
 	  Dir         <= (others => '0');
       varRW       <= '1';
+      
+        A   <= (others => '0');     -- Acumulador A = 0x00
+  B   <= (others => '0');     -- Acumulador B = 0x00
+  XH  <= (others => '0');     -- Opcional: X = 0x0000
+  XL  <= (others => '0');
+  YH  <= (others => '0');     -- Opcional: Y = 0x0000 (si lo usas)
+  YL  <= (others => '0');
+
+  PCH <= X"00";               -- Opcional: reflejar PC inicial en registros
+  PCL <= X"14";
+  SPH <= X"FF";               -- Opcional: reiniciar stack
+  SPL <= X"FF";
+      
     else
       if (rising_edge(clk)) then
 		if ce = '1' then
-			if (nIRQ = '0' and estados(4) = '0') then
-                IRQ <= '1';
-            end if;
-            if (nXIRQ = '0' and estados(6) = '0') then
-                XIRQ <= '1';
-            end if;
-			
 			case e_presente is
-				when X"000" => 
-					Dir <= PC;
-					nRW <= '1';
-					e_siguiente <= X"001";
-					
-				when X"001" => 
-					PC <= PC + 1;
-					e_siguiente <= X"002";
-					
-				when X"002" => 
-					e_siguiente <= (Data_in & ZERO(3 downto 0));
-				
-				
-				--------------------------------------------------------------------------------------------------------------------
-				when X"860" => -- LDAA IMM
-					Dir <= PC;
-					nRW <= '1';
-					e_siguiente <= X"861";
-
-				when X"861" => -- LDAA
-					PC <= PC + 1;
-					e_siguiente <= X"862";
-
-				when X"862" => -- LDAA
-					A <= Data_in;
-					estados(3) <= Data_in(7); --N
-					
-					if(Data_in = ZERO) then 
-						estados(2) <= '1'; 
-					else 
-						estados(2) <= '0';
-					end if; --Z
-					
-					estados(1) <= '0'; --V
-					if (XIRQ = '1') then
-					  e_siguiente <= microX;
-					elsif (IRQ = '1') then
-						e_siguiente <= microI;
-					else
+					when X"000" =>
 						Dir <= PC;
 						e_siguiente <= X"001";
-					end if;
-
-			  -----------------------------------------
-
-			  when X"C60" => -- LDAB
-				Dir <= PC;
-				nRW <= '1';
-				e_siguiente <= X"C61";
-
-			  when X"C61" => -- LDAB
-				PC <= PC + 1;
-				e_siguiente <= X"C62";
-
-			  when X"C62" => -- LDAB
-				B <= Data_in;
-				estados(3) <= Data_in(7);
-				if(Data_in = ZERO) then 
-					estados(2) <= '1';
-				else 
-					estados(2) <= '0';
-				end if;
-				
-				estados(1) <= '0';
-				if (XIRQ = '1') then
-				  e_siguiente <= microX;
-				else
-				  if (IRQ = '1') then
-					e_siguiente <= microI;
-				  else
-					Dir <= PC;
-					e_siguiente <= X"001";
-				  end if;
-				end if;
-
-				-- LDX #$0010 (opcode CE)
-			  when X"CE0" => 
-				Dir <= PC;
-				nRW <= '1';
-				e_siguiente <= X"CE1";
-				
-			  when X"CE1" => 
-				PC <= PC + 1;
-				AuxH <= Data_in;
-				e_siguiente <= X"CE2";
-			  
-			  when X"CE2" =>
-				PC <= PC + 1;
-				AuxL <= Data_in;
-				XH <= AuxH;
-				XL <= AuxL;
-				Dir <= PC;
-				e_siguiente <= X"001";
-				
-			  when X"CE3" =>
-                PC <= PC + 1;
-                e_siguiente <= X"CE4";
-                    
-              when X"CE4" =>
-                XL <= Data_in;
-                estados(3) <= Data_in(7);
-                if(Data_in = ZERO and XH = ZERO) then
-                    estados(2) <= '1';
-                else
-                    estados(2) <= '0';
-                end if;
-                estados(1) <= '0';
-                if (XIRQ = '1') then
-                    e_siguiente <= microX;
-                elsif (IRQ = '1') then
-                    e_siguiente <= microI;
-                else
-                    Dir <= PC;
-                    e_siguiente <= X"001";
-                end if;  
-
-			  -- ABA - opcode $1B
-                when X"1B0" =>
-                    Aux <= ("00000000" & A) + ("00000000" & B);
-                    AuxL <= A + B;  -- Calcular primero el resultado
-                    A <= A + B;
-                    e_siguiente <= X"1B1";
-                    
-                when X"1B1" =>
-                    -- Actualizar flags
-                    estados(3) <= AuxL(7);  -- N flag
-                    if(AuxL = ZERO) then
-                        estados(2) <= '1';  -- Z flag
-                    else
-                        estados(2) <= '0';
-                    end if;
-                    estados(0) <= Aux(8);  -- C flag
-                    if (XIRQ = '1') then
-                        e_siguiente <= microX;
-                    elsif (IRQ = '1') then
-                        e_siguiente <= microI;
-                    else
-                        Dir <= PC;
-                        e_siguiente <= X"001";
-                    end if;
-                
-			  -- BNE - opcode $26
-                when X"260" =>
-                    Dir <= PC;
-                    nRW <= '1';
-                    e_siguiente <= X"261";
-                    
-                when X"261" =>
-                    PC <= PC + 1;
-                    e_siguiente <= X"262";
-                    
-                when X"262" =>
-                    if(estados(2)='0') then
-                        if (Data_in(7) = '1') then
-                            PC <= PC - unsigned(not(Data_in-1));
-                        else
-                            PC <= PC + Data_in;
-                        end if;
-                    end if;
-                    e_siguiente <= X"263";
-                    
-                when X"263" =>
-                    if (XIRQ = '1') then
-                        e_siguiente <= microX;
-                    elsif (IRQ = '1') then
-                        e_siguiente <= microI;
-                    else
-                        Dir <= PC;
-                        e_siguiente <= X"001";
-                    end if;
-
-			  -- STAA indexed,X - opcode $A7
-                when X"A70" =>
-                    Dir <= PC;
-                    nRW <= '1';
-                    e_siguiente <= X"A71";
-                    
-                when X"A71" =>
-                    PC <= PC + 1;
-                    AuxL <= Data_in;
-                    e_siguiente <= X"A72";
-                    
-                when X"A72" =>
-                    Dir <= (XH & XL) + ("00000000" & AuxL);
-                    Data_out <= A;
-                    nRW <= '0';
-                    e_siguiente <= X"A73";
-                    
-                when X"A73" =>
-                    nRW <= '1';
-                    if (XIRQ = '1') then
-                        e_siguiente <= microX;
-                    elsif (IRQ = '1') then
-                        e_siguiente <= microI;
-                    else
-                        Dir <= PC;
-                        e_siguiente <= X"001";
-                    end if;
-
-				-- STAB indexed,X - opcode $E7
-                when X"E70" =>
-                    Dir <= PC;
-                    nRW <= '1';
-                    e_siguiente <= X"E71";
-                    
-                when X"E71" =>
-                    PC <= PC + 1;
-                    AuxL <= Data_in;
-                    e_siguiente <= X"E72";
-                    
-                when X"E72" =>
-                    Dir <= (XH & XL) + ("00000000" & AuxL);
-                    Data_out <= B;
-                    nRW <= '0';
-                    e_siguiente <= X"E73";
-                    
-                when X"E73" =>
-                    nRW <= '1';
-                    if (XIRQ = '1') then
-                        e_siguiente <= microX;
-                    elsif (IRQ = '1') then
-                        e_siguiente <= microI;
-                    else
-                        Dir <= PC;
-                        e_siguiente <= X"001";
-                    end if;
-
-				  -- BRA - opcode $20
-                when X"200" =>
-                    Dir <= PC;
-                    nRW <= '1';
-                    e_siguiente <= X"201";
-                    
-                when X"201" =>
-                    PC <= PC + 1;
-                    e_siguiente <= X"202";
-                    
-                when X"202" =>
-                    if (Data_in(7) = '1') then
-                        PC <= PC - unsigned(not(Data_in-1));
-                    else
-                        PC <= PC + Data_in;
-                    end if;
-                    e_siguiente <= X"203";
-                    
-                when X"203" =>
-                    if (XIRQ = '1') then
-                        e_siguiente <= microX;
-                    elsif (IRQ = '1') then
-                        e_siguiente <= microI;
-                    else
-                        Dir <= PC;
-                        e_siguiente <= X"001";
-                    end if;
-                    
-              -- MUL: D ? A × B, A ? D[15:8], B ? D[7:0]
-			  when X"3D0" =>
-                    D <= A * B;
-                    e_siguiente <= X"3D1";
-                    
-              when X"3D1" =>
-                    A <= D(15 downto 8);
-                    B <= D(7 downto 0);
-                    if(D(7) = '1') then
-                        estados(0) <= '1';
-                    else
-                        estados(0) <= '0';
-                    end if;
-                    if (XIRQ = '1') then
-                        e_siguiente <= microX;
-                    elsif (IRQ = '1') then
-                        e_siguiente <= microI;
-                    else
-                        Dir <= PC;
-                        e_siguiente <= X"001";
-                    end if;
-				  
-				  -- RTI - opcode $3B
-                when X"3B0" =>
-                    Dir <= (SPH & SPL);
-                    SPL <= SPL + 1;
-                    nRW <= '1';
-                    e_siguiente <= X"3B1";
-                    
-                when X"3B1" =>
-                    estados <= std_logic_vector(Data_in);
-                    Dir <= (SPH & SPL);
-                    SPL <= SPL + 1;
-                    e_siguiente <= X"3B2";
-                    
-                when X"3B2" =>
-                    PCH <= Data_in;
-                    Dir <= (SPH & SPL);
-                    SPL <= SPL + 1;
-                    e_siguiente <= X"3B3";
-                    
-                when X"3B3" =>
-                    PCL <= Data_in;
-                    PC <= PCH & Data_in;
-                    IRQ <= '0';
-                    XIRQ <= '0';
-                    Dir <= PCH & Data_in;
-                    e_siguiente <= X"001";
-                    
-                -- Driver XIRQ
-                when X"444" =>
-                    saved_pc <= PC;
-                    SPL <= SPL - 1;
-                    Dir <= (SPH & SPL);
-                    Data_out <= PC(7 downto 0);
-                    nRW <= '0';
-                    e_siguiente <= X"445";
-                    
-                when X"445" =>
-                    SPL <= SPL - 1;
-                    Dir <= (SPH & SPL);
-                    Data_out <= PC(15 downto 8);
-                    nRW <= '0';
-                    e_siguiente <= X"446";
-                    
-                when X"446" =>
-                    SPL <= SPL - 1;
-                    Dir <= (SPH & SPL);
-                    Data_out <= unsigned(estados);
-                    nRW <= '0';
-                    PC <= IntRX;
-                    e_siguiente <= X"447";
-                    
-                when X"447" =>
-                    nRW <= '1';
-                    Dir <= PC;
-                    e_siguiente <= X"001";
-                    
-                -- Driver IRQ
-                when X"333" =>
-                    saved_pc <= PC;
-                    SPL <= SPL - 1;
-                    Dir <= (SPH & SPL);
-                    Data_out <= PC(7 downto 0);
-                    nRW <= '0';
-                    e_siguiente <= X"334";
-                    
-                when X"334" =>
-                    SPL <= SPL - 1;
-                    Dir <= (SPH & SPL);
-                    Data_out <= PC(15 downto 8);
-                    nRW <= '0';
-                    e_siguiente <= X"335";
-                    
-                when X"335" =>
-                    SPL <= SPL - 1;
-                    Dir <= (SPH & SPL);
-                    Data_out <= unsigned(estados);
-                    nRW <= '0';
-                    PC <= IntRI;
-                    e_siguiente <= X"336";
-                    
-                when X"336" =>
-                    nRW <= '1';
-                    Dir <= PC;
-                    e_siguiente <= X"001";
-                    
-                    ------------------------
-				  when others =>
-					e_siguiente <= X"000";
-					PC <= X"0000";
-			end case;
-			e_presente <= e_siguiente;
+					when X"001" =>
+						PC <= PC + 1;
+						e_siguiente <= e_presente + 1;
+					when X"002" =>
+						e_siguiente <= (Data_in & ZERO(3 downto 0));
+						
+---------------------------------------------------------------------------------------------------------------------
+-- LOAD ACCUMULATOR A FROM MEMORY
+					when X"860" => -- LDAA IMM
+						Dir <= PC;
+						e_siguiente <= e_presente + 1;
+					when X"861" => -- LDAA
+						PC <= PC + 1;
+						e_siguiente <= e_presente + 1;
+					when X"862" => -- LDAA
+						A <= Data_in; 
+						-- Actualiza N
+						estados(3) <= Data_in(7);
+						-- Actualiza Z
+						if(Data_in = ZERO) then
+							estados(2) <= '1';
+						else
+							estados(2) <= '0';
+						end if;
+						-- Actualiza V
+						estados(1) <= '0';
+						if (XIRQ = '1') then
+							e_siguiente <= microX;
+						else
+							if (IRQ = '1') then
+								e_siguiente <= microI;
+							else
+								Dir <= PC;
+								e_siguiente <= X"001";
+							end if;
+						end if;
+---------------------------------------------------------------------------------------------------------------------
+-- LOAD ACCUMULATOR B FROM MEMORY
+					when X"C60" => -- LDAB
+						Dir <= PC;
+						e_siguiente <= e_presente + 1;
+					when X"C61" => -- LDAB
+						PC <= PC + 1;
+						e_siguiente <= e_presente + 1;
+					when X"C62" => -- LDAB
+						B <= Data_in;
+						-- Actualiza N
+						estados(3) <= Data_in(7);
+						-- Actualiza Z
+						if(Data_in = ZERO) then
+							estados(2) <= '1';
+						else
+							estados(2) <= '0';
+						end if;
+						-- Actualiza V
+						estados(1) <= '0';
+						if (XIRQ = '1') then
+							e_siguiente <= microX;
+						else
+							if (IRQ = '1') then
+								e_siguiente <= microI;
+							else
+								Dir <= PC;
+								e_siguiente <= X"001";
+							end if;
+						end if;
+---------------------------------------------------------------------------------------------------------------------
+-- BRANCH ALWAYS 
+					when X"200" =>
+						Dir <= PC;
+						e_siguiente <= e_presente + 1;
+					when X"201" =>
+						PC <= PC + 1;
+						e_siguiente <= e_presente + 1;
+					when X"202" =>
+						if (Data_in(7) = '1') then
+							PC <= PC - unsigned(not(Data_in-1));
+						else
+							PC <= PC + Data_in;
+						end if;
+						e_siguiente <= e_presente + 1;
+					when X"203" =>
+						if (XIRQ = '1') then
+							e_siguiente <= microX;
+						else
+							if (IRQ = '1') then
+								e_siguiente <= microI;
+							else
+								Dir <= PC;
+								e_siguiente <= X"001";
+							end if;
+						end if;
+---------------------------------------------------------------------------------------------------------------------
+-- BRANCH IF NOT EQUAL
+					when X"260" =>
+						Dir <= PC;
+						e_siguiente <= e_presente + 1;
+					when X"261" =>
+						PC <= PC + 1;
+						e_siguiente <= e_presente + 1;
+					when X"262" =>
+						if(estados(2)='0') then
+							if (Data_in(7) = '1') then
+								PC <= PC - unsigned(not(Data_in-1));
+							else
+								PC <= PC + Data_in;
+							end if;
+						end if;
+						e_siguiente <= e_presente + 1;
+					when X"263" =>
+						if (XIRQ = '1') then
+							e_siguiente <= microX;
+						else
+							if (IRQ = '1') then
+								e_siguiente <= microI;
+							else
+								Dir <= PC;
+								e_siguiente <= X"001";
+							end if;
+						end if;
+---------------------------------------------------------------------------------------------------------------------
+-- LOAD ACCUMULATOR X FROM MEMORY
+					when X"CE0" => -- LDX IMM
+						Dir <= PC;
+						e_siguiente <= e_presente + 1;
+					when X"CE1" => -- LDX
+						PC <= PC + 1;
+						e_siguiente <= e_presente + 1;
+					when X"CE2" => -- LDX IMM
+						XH <= Data_in; 
+						e_siguiente <= e_presente + 1;
+					when X"CE3" => -- LDX IMM
+						Dir <= PC;
+						e_siguiente <= e_presente + 1;
+					when X"CE4" => -- LDX
+						PC <= PC + 1;
+						e_siguiente <= e_presente + 1;
+					when X"CE5" => -- LDX
+						XL <= Data_in; 
+						-- Actualiza N
+						estados(3) <= XL(7);
+						-- Actualiza Z
+						if(XL = ZERO and XH = ZERO) then
+							estados(2) <= '1';
+						else
+							estados(2) <= '0';
+						end if;
+						-- Actualiza V
+						estados(1) <= '0';
+						if (XIRQ = '1') then
+							e_siguiente <= microX;
+						else
+							if (IRQ = '1') then
+								e_siguiente <= microI;
+							else
+								Dir <= PC;
+								e_siguiente <= X"001";
+							end if;
+						end if;
+---------------------------------------------------------------------------------------------------------------------
+-- ADD ACCUMULATOR A+B AND STORE IN A
+					when X"1B0" => -- ABA INH
+						A <= A+B;
+						e_siguiente <= e_presente + 1;
+					when X"1B1" => -- 
+						-- Actualiza N
+						estados(3) <= A(7);
+						-- Actualiza Z
+						if(A = ZERO) then
+							estados(2) <= '1';
+						else
+							estados(2) <= '0';
+						end if;
+						-- Actualiza V
+						estados(1) <= '0';
+						if (XIRQ = '1') then
+							e_siguiente <= microX;
+						else
+							if (IRQ = '1') then
+								e_siguiente <= microI;
+							else
+								Dir <= PC;
+								e_siguiente <= X"001";
+							end if;
+						end if;
+---------------------------------------------------------------------------------------------------------------------
+-- STORE ACCUMULATOR A TO MEMORY
+					when X"A70" => -- STAA IND, X
+						Dir <= PC;
+						e_siguiente <= e_presente + 1;
+					when X"A71" => -- 
+						PC <= PC + 1;
+						e_siguiente <= e_presente + 1;
+					when X"A72" => -- 
+						if (Data_in(7) = '1') then
+							Dir <= unsigned(XH & XL) - unsigned(not(Data_in-1));
+						else
+							Dir <= unsigned(XH & XL) + Data_in;
+						end if;
+						e_siguiente <= e_presente + 1;
+					when X"A73" => --
+						Data_out <= A; 
+						nRW <= '0';
+						e_siguiente <= e_presente + 1;
+					when X"A74" => --
+						nRW <= '1';
+						-- Actualiza N
+						estados(3) <= Data_in(7);
+						-- Actualiza Z
+						if(Data_in = ZERO) then
+							estados(2) <= '1';
+						else
+							estados(2) <= '0';
+						end if;
+						if (XIRQ = '1') then
+							e_siguiente <= microX;
+						else
+							if (IRQ = '1') then
+								e_siguiente <= microI;
+							else
+								Dir <= PC;
+								e_siguiente <= X"001";
+							end if;
+						end if;
+---------------------------------------------------------------------------------------------------------------------
+-- STORE ACCUMULATOR B TO MEMORY
+					when X"E70" => -- STAB IND, X
+						Dir <= PC;
+						e_siguiente <= e_presente + 1;
+					when X"E71" => -- 
+						PC <= PC + 1;
+						e_siguiente <= e_presente + 1;
+					when X"E72" => -- 
+						if (Data_in(7) = '1') then
+							Dir <= unsigned(XH & XL) - unsigned(not(Data_in-1));
+						else
+							Dir <= unsigned(XH & XL) + Data_in;
+						end if;
+						e_siguiente <= e_presente + 1;
+					when X"E73" => --
+						Data_out <= B; 
+						nRW <= '0';
+						e_siguiente <= e_presente + 1;
+					when X"E74" => --
+						nRW <= '1';
+						-- Actualiza N
+						estados(3) <= XH(7);
+						-- Actualiza Z
+						if(XH = ZERO) and (XL = ZERO) then
+							estados(2) <= '1';
+						else
+							estados(2) <= '0';
+						end if;
+						if (XIRQ = '1') then
+							e_siguiente <= microX;
+						else
+							if (IRQ = '1') then
+								e_siguiente <= microI;
+							else
+								Dir <= PC;
+								e_siguiente <= X"001";
+							end if;
+						end if;
+---------------------------------------------------------------------------------------------------------------------
+-- MULTIPLY A*B AND STORE IN D
+					when X"3D0" => -- MUL INH
+						Aux <= A*B;
+						e_siguiente <= e_presente + 1;
+					when X"3D1" => -- 
+						A <= Aux(15 downto 8);
+						e_siguiente <= e_presente + 1;
+					when X"3D2" => -- 
+						B <= Aux(7 downto 0);
+						e_siguiente <= e_presente + 1;
+					when X"3D3" => -- 
+						-- Actualiza N
+						estados(3) <= A(7);
+						-- Actualiza Z
+						if(A = ZERO) and (B = ZERO) then
+							estados(2) <= '1';
+						else
+							estados(2) <= '0';
+						end if;
+						if (XIRQ = '1') then
+							e_siguiente <= microX;
+						else
+							if (IRQ = '1') then
+								e_siguiente <= microI;
+							else
+								Dir <= PC;
+								e_siguiente <= X"001";
+							end if;
+						end if;
+---------------------------------------------------------------------------------------------------------------------
+-- XIRQ INTERRUPTION 
+					when X"330" => -- IRQ INH
+						Dir <= SP;
+						nRW <= '0';
+						e_siguiente <= e_presente + 1;
+					when X"331" => -- 
+						Data_out <= PC(7 downto 0);
+						SP <= SP - 1;
+						e_siguiente <= e_presente + 1;
+					when X"332" => --
+						Dir <= SP;
+						e_siguiente <= e_presente + 1;
+					when X"333" => -- 
+						Data_out <= PC(15 downto 8);
+						SP <= SP - 1;
+						e_siguiente <= e_presente + 1;
+					when X"334" => -- 
+						PC <= IntRX;
+						Dir <= SP;
+						e_siguiente <= e_presente + 1;
+					when X"335" => -- 
+						Data_out <= XL;
+						SP <= SP - 1;
+						e_siguiente <= e_presente + 1;
+					when X"336" => --
+						Dir <= SP;
+						e_siguiente <= e_presente + 1;
+					when X"337" => -- 
+						Data_out <= XH;
+						SP <= SP - 1;
+						e_siguiente <= e_presente + 1;
+					when X"338" => --
+						Dir <= SP;
+						e_siguiente <= e_presente + 1;
+					when X"339" => -- 
+						Data_out <= A;
+						SP <= SP - 1;
+						e_siguiente <= e_presente + 1;
+					when X"33A" => --
+						Dir <= SP;
+						e_siguiente <= e_presente + 1;
+					when X"33B" => -- 
+						Data_out <= B;
+						SP <= SP - 1;
+						e_siguiente <= e_presente + 1;
+					when X"33C" => --
+						Dir <= SP;
+						e_siguiente <= e_presente + 1;
+					when X"33D" => -- 
+						Data_out <= unsigned(estados);
+						SP <= SP - 1;
+						e_siguiente <= e_presente + 1;
+					when X"33E" => --
+						nRW <= '1';
+						e_siguiente <= X"000";
+---------------------------------------------------------------------------------------------------------------------
+-- IRQ INTERRUPTION 
+					when X"440" => -- IRQ INH
+						Dir <= SP;
+						nRW <= '0';
+						e_siguiente <= e_presente + 1;
+					when X"441" => -- 
+						Data_out <= PC(7 downto 0);
+						SP <= SP - 1;
+						e_siguiente <= e_presente + 1;
+					when X"442" => --
+						Dir <= SP;
+						e_siguiente <= e_presente + 1;
+					when X"443" => -- 
+						Data_out <= PC(15 downto 8);
+						SP <= SP - 1;
+						e_siguiente <= e_presente + 1;
+					when X"444" => -- 
+						PC <= IntRI;
+						Dir <= SP;
+						e_siguiente <= X"335";
+---------------------------------------------------------------------------------------------------------------------
+-- RETURN FROM INTERRUPTION 
+					when X"3B0" => -- RTI INH
+						SP <= SP + 1;
+						nRW <= '1';
+						e_siguiente <= e_presente + 1;
+					when X"3B1" => -- 
+						Dir <= SP;
+						e_siguiente <= e_presente + 1;
+					when X"3B2" => --
+						SP <= SP + 1;
+						e_siguiente <= e_presente + 1;
+					when X"3B3" => -- 
+						estados <= std_logic_vector(Data_in);
+						e_siguiente <= e_presente + 1;
+					when X"3B4" => --
+						Dir <= SP;
+						e_siguiente <= e_presente + 1;
+					when X"3B5" => --
+						SP <= SP + 1;
+						e_siguiente <= e_presente + 1;
+					when X"3B6" => -- 
+						B <= Data_in;
+						e_siguiente <= e_presente + 1;
+					when X"3B7" => -- 
+						Dir <= SP;
+						e_siguiente <= e_presente + 1;
+					when X"3B8" => --
+						SP <= SP + 1;
+						e_siguiente <= e_presente + 1;
+					when X"3B9" => -- 
+						A <= Data_in;
+						e_siguiente <= e_presente + 1;
+					when X"3BA" => --
+						Dir <= SP;
+						e_siguiente <= e_presente + 1;
+					when X"3BB" => --
+						SP <= SP + 1;
+						e_siguiente <= e_presente + 1;
+					when X"3BC" => -- 
+						XH <= Data_in;
+						e_siguiente <= e_presente + 1;
+					when X"3BD" => --
+						Dir <= SP;
+						e_siguiente <= e_presente + 1;
+					when X"3BE" => --
+						SP <= SP + 1;
+						e_siguiente <= e_presente + 1;
+					when X"3BF" => -- 
+						XL <= Data_in;
+						e_siguiente <= e_presente + 1;
+					when X"3C0" => --
+						Dir <= SP;
+						e_siguiente <= e_presente + 1;
+					when X"3C1" => --
+						SP <= SP + 1;
+						e_siguiente <= e_presente + 1;
+					when X"3C2" => -- 
+						PC(15 downto 8) <= Data_in;
+						e_siguiente <= e_presente + 1;
+					when X"3C3" => --
+						Dir <= SP;
+						e_siguiente <= e_presente + 1;
+					when X"3C4" => --
+						nRW <= '1';
+						e_siguiente <= e_presente + 1;
+					when X"3C5" => -- 
+						PC(7 downto 0) <= Data_in;
+						e_siguiente <= e_presente + 1;
+					when X"3C6" => -- 
+						Dir <= PC;
+						e_siguiente <= X"001";
+---------------------------------------------------------------------------------------------------------------------
+-- .
+-- .
+-- .
+---------------------------------------------------------------------------------------------------------------------
+					when others =>
+						e_siguiente <= X"000";
+						PC <= X"0000";
+					end case;
+			--e_presente <= e_siguiente;
 		end if;
 	  end if;
     end if;
 
     -- debug vals
-    --e_presente <= e_siguiente;
+    e_presente <= e_siguiente;
     A_out <= A;
     B_out <= B;
-    e_presente_out <= e_presente(11 downto 4);
+    e_presente_out <= e_presente(7 downto 0);
     PC_low_out <= PC(7 downto 0);
     X_low_out <= XL;
     X_high_out <= XH;
